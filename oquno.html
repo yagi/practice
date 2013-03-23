@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="js/jQueryRotateCompressed.2.2.js"></script>
+	<script type="text/javascript">
+<!--
+
+var deg = 0.0;
+
+rotateOquno = function(e) {
+	deg += (e.wheelDelta ? (e.wheelDelta/25) : (e.detail/2.5) );
+	var size = (Math.sin(deg/360)+1) * 600 + 400;
+	
+	var oq = $("#oquno");
+	oq.rotate(deg);
+	oq.css({width: size, height: size});
+}
+
+window.addEventListener('DOMMouseScroll', rotateOquno); // Firefox
+window.addEventListener('mousewheel', rotateOquno); // Chrome
+//window.addEventListener('load', rotateOquno);
+
+-->
+</script>
+<style type="text/css">
+	body { 
+		overflow: hidden;
+	}
+	img { text-align: center; }
+</style>
+<title>ホイール連動奥野</title>
 </head>
 <body>
-	<img src='oquno.png'>
+	<img id='oquno' src='oquno.png' alt='oquno'>
 </body>
 </html>
