@@ -10,8 +10,8 @@
 var deg = 0.0;
 
 rotateOquno = function(e) {
-	deg += (e.wheelDelta ? (e.wheelDelta/25) : (e.detail/2.5) );
-	var size = (Math.sin(deg/360)+1) * 600 + 400;
+	deg += (e.wheelDelta ? (-e.wheelDelta/70) : (e.detail/2.5) );
+	var size = (Math.sin(deg/360)+1) * 800 + 400;
 	
 	var oq = $("#oquno");
 	oq.rotate(deg);
@@ -33,6 +33,6 @@ window.addEventListener('mousewheel', rotateOquno); // Chrome
 <title>ホイール連動奥野</title>
 </head>
 <body>
-	<img id='oquno' src='oquno.png' alt='oquno'>
+	<img id='oquno' src='img/oquno.png' alt='oquno'>
 </body>
 </html>
