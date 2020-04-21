@@ -37,15 +37,26 @@ rotateOquno = function() {
 updateOquno = function() {
 	var size = (Math.sin(deg/360)+1) * 900 + 32;
     
-    var os = document.getElementById("oquno").style;
+    var os = oquno.style;
     os.width = size + "px";
     os.height = size + "px";
     os.transform = "rotate(" + deg + "deg)"
 }
 
-setInterval(rotateOquno, 16);
-window.addEventListener('load', updateOquno);
 
+var oquno = null;
+
+window.addEventListener('load', function(){
+
+  oquno = document.getElementById("oquno");
+  var target = (new URL(document.location)).searchParams.get("target");
+  if ( target ) {
+      oquno["src"] = target;
+  }
+
+  updateOquno();
+  setInterval(rotateOquno, 16);
+});
 -->
 </script>
 <style type="text/css">
