@@ -8,7 +8,7 @@
 <!--
 
 
-var deg = 0.0;
+var deg = 1.0;
 var speed = 0.0;
 scrollOquno = function(e) {
 	speed += (e.wheelDelta ? (-e.wheelDelta/70) : (e.detail/2.5) );
@@ -16,6 +16,15 @@ scrollOquno = function(e) {
 
 window.addEventListener('DOMMouseScroll', scrollOquno); // Firefox
 window.addEventListener('mousewheel', scrollOquno); // Chrome
+
+var touching = false;
+window.addEventListener("touchstart", function(e) { touching = true; });
+window.addEventListener("touchend", function(e) { touching = false; });
+window.addEventListener("touchmove", function(e) {
+    if ( !touching )
+        return;
+    speed -= e.touches[0].pageY / 150.0;
+});
 
 var lastDeg = deg;
 
@@ -30,6 +39,8 @@ rotateOquno = function() {
 
 updateOquno = function() {
 	var size = (Math.sin(deg/360)+1) * 900 + 32;
+
+    // ここだけjQuery依存部分
 	var oq = $("#oquno");
 	oq.rotate(deg);
 	oq.css({width: size, height: size});
@@ -46,7 +57,7 @@ window.addEventListener('load', updateOquno);
 	}
 	img { text-align: center; }
 </style>
-<title>ホイール連動奥野</title>
+<title>回転して大きくなったり小さくなったりするやつ</title>
 </head>
 <body>
 	<img id='oquno' src='img/oquno.png' alt='oquno'>
