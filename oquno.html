@@ -2,11 +2,8 @@
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
-	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-	<script type="text/javascript" src="js/jQueryRotateCompressed.2.2.js"></script>
 	<script type="text/javascript">
 <!--
-
 
 var deg = -570.0;
 var speed = 0.0;
@@ -39,11 +36,11 @@ rotateOquno = function() {
 
 updateOquno = function() {
 	var size = (Math.sin(deg/360)+1) * 900 + 32;
-
-    // ここだけjQuery依存部分
-	var oq = $("#oquno");
-	oq.rotate(deg);
-	oq.css({width: size, height: size});
+    
+    var os = document.getElementById("oquno").style;
+    os.width = size + "px";
+    os.height = size + "px";
+    os.transform = "rotate(" + deg + "deg)"
 }
 
 setInterval(rotateOquno, 16);
