@@ -7,20 +7,36 @@
 	<script type="text/javascript">
 <!--
 
-var deg = 0.0;
 
-rotateOquno = function(e) {
-	deg += (e.wheelDelta ? (-e.wheelDelta/70) : (e.detail/2.5) );
-	var size = (Math.sin(deg/360)+1) * 800 + 400;
-	
+var deg = 0.0;
+var speed = 0.0;
+scrollOquno = function(e) {
+	speed += (e.wheelDelta ? (-e.wheelDelta/70) : (e.detail/2.5) );
+}
+
+window.addEventListener('DOMMouseScroll', scrollOquno); // Firefox
+window.addEventListener('mousewheel', scrollOquno); // Chrome
+
+var lastDeg = deg;
+
+rotateOquno = function() { 
+  if ( speed < 0.1 && speed > -0.1 )
+     return;
+  speed *= 0.88;
+  deg += speed;
+  updateOquno();
+}
+    
+
+updateOquno = function() {
+	var size = (Math.sin(deg/360)+1) * 900 + 32;
 	var oq = $("#oquno");
 	oq.rotate(deg);
 	oq.css({width: size, height: size});
 }
 
-window.addEventListener('DOMMouseScroll', rotateOquno); // Firefox
-window.addEventListener('mousewheel', rotateOquno); // Chrome
-//window.addEventListener('load', rotateOquno);
+setInterval(rotateOquno, 16);
+window.addEventListener('load', updateOquno);
 
 -->
 </script>
